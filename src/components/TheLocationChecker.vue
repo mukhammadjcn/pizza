@@ -60,13 +60,11 @@ export default {
       axios
         .request(options)
         .then((response) => {
-          this.location = response.data.plus_code.compound_code;
-          alert(
-            this.location
-              .split(" ")
-              .filter((el, index) => index > 0)
-              .join(" ")
-          );
+          this.location = response.data.plus_code.compound_code
+            .split(" ")
+            .filter((el, index) => index > 0)
+            .join(" ");
+          alert(this.location);
         })
         .catch(function (error) {
           console.error(error);
