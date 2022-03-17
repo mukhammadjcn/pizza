@@ -28,14 +28,12 @@
 </template>
 
 <script>
-import axiox from "axios";
+import axios from "axios";
 
 export default {
   data() {
     return {
       location: "",
-      lang: "",
-      lat: "",
     };
   },
   methods: {
@@ -45,17 +43,33 @@ export default {
     getLocation() {
       navigator.geolocation.getCurrentPosition((positon) => {
         this.getAdress(positon.coords.latitude, positon.coords.longitude);
-        alert(positon.coords.latitude);
-        alert(positon.coords.longitude);
       });
     },
     getAdress(lat, long) {
-      axiox
-        .get(
-          `http://api.positionstack.com/v1/reverse?access_key=12649d80813e6ee004555cb51056269f&query=${lat},${long}`
-        )
+      var options = {
+        method: "GET",
+        url: "https://google-maps-geocoding.p.rapidapi.com/geocode/json",
+        params: { latlng: `${lat},${long}`, language: "en" },
+        headers: {
+          "x-rapidapi-host": "google-maps-geocoding.p.rapidapi.com",
+          "x-rapidapi-key":
+            "de99029254msh6b85d4f50fe4d4ap19011fjsn7ecdae8b48b7",
+        },
+      };
+
+      axios
+        .request(options)
         .then((response) => {
-          alert(response.data.data[0].region);
+          this.location = response.data.plus_code.compound_code;
+          alert(
+            this.location
+              .split(" ")
+              .filter((el, index) => index > 0)
+              .join(" ")
+          );
+        })
+        .catch(function (error) {
+          console.error(error);
         });
     },
   },
