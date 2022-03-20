@@ -1,6 +1,16 @@
 <template>
+  <TheHeader />
   <router-view />
+  <TheFooter />
 </template>
+
+<script>
+import TheFooter from "./components/TheFooter.vue";
+import TheHeader from "./components/TheHeader.vue";
+export default {
+  components: { TheHeader, TheFooter },
+};
+</script>
 
 <style lang="scss">
 @import url("https://fonts.googleapis.com/css2?family=Inter:wght@100;200;300;400;500;600;700;800;900&family=Poppins:wght@100;200;300;400;500;600;700;800;900&display=swap");

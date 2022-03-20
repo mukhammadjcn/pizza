@@ -95,7 +95,10 @@ export default createStore({
       );
 
       if (productIndex >= 0) {
-        state.cart[productIndex].qty++;
+        if (state.cart[productIndex].qty < 10) {
+          state.cart[productIndex].qty++;
+          state.totalSum += product.price;
+        }
       } else {
         const newItem = {
           productId: product.id,
@@ -105,9 +108,8 @@ export default createStore({
           qty: 1,
         };
         state.cart.push(newItem);
-        console.log(newItem);
+        state.totalSum += product.price;
       }
-      state.totalSum += product.price;
     },
     plusProduct(state, payload) {
       const product = payload;

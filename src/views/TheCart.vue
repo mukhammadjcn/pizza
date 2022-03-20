@@ -1,5 +1,4 @@
 <template>
-  <TheHeader />
   <div class="cart">
     <div class="cart__container">
       <h1 class="cart__title">Ваш заказ</h1>
@@ -19,10 +18,9 @@
 </template>
 
 <script>
-import TheHeader from "@/components/TheHeader.vue";
 import TheCartItem from "../components/TheCartItem.vue";
 export default {
-  components: { TheHeader, TheCartItem },
+  components: { TheCartItem },
   computed: {
     cart() {
       return this.$store.getters.cart;

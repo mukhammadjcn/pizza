@@ -1,6 +1,5 @@
 <template>
   <div class="home">
-    <TheHeader />
     <div class="full-menu">
       <div class="container">
         <TheNav :list="menu" />
@@ -9,14 +8,10 @@
         <TheProductList />
       </div>
     </div>
-    <div class="">
-      <div class="container"></div>
-    </div>
   </div>
 </template>
 
 <script>
-import TheHeader from "@/components/TheHeader.vue";
 import TheNav from "../components/TheNav.vue";
 import TheReels from "../components/TheReels.vue";
 import TheLocationChecker from "../components/TheLocationChecker.vue";
@@ -24,7 +19,6 @@ import TheProductList from "@/components/TheProductList.vue";
 export default {
   name: "HomeView",
   components: {
-    TheHeader,
     TheNav,
     TheReels,
     TheLocationChecker,
