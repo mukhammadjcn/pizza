@@ -6,7 +6,11 @@
         <TheNav :list="menu" />
         <TheReels :list="reels" />
         <TheLocationChecker />
+        <TheProductList />
       </div>
+    </div>
+    <div class="">
+      <div class="container"></div>
     </div>
   </div>
 </template>
@@ -16,9 +20,16 @@ import TheHeader from "@/components/TheHeader.vue";
 import TheNav from "../components/TheNav.vue";
 import TheReels from "../components/TheReels.vue";
 import TheLocationChecker from "../components/TheLocationChecker.vue";
+import TheProductList from "@/components/TheProductList.vue";
 export default {
   name: "HomeView",
-  components: { TheHeader, TheNav, TheReels, TheLocationChecker },
+  components: {
+    TheHeader,
+    TheNav,
+    TheReels,
+    TheLocationChecker,
+    TheProductList,
+  },
   data() {
     return {
       menu: [

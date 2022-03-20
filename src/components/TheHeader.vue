@@ -146,7 +146,7 @@
         </svg>
       </router-link>
 
-      <div class="cart flex">
+      <div class="cart flex" @click="this.$router.push('/cart')">
         <svg
           width="24"
           height="24"
@@ -174,7 +174,7 @@
             </clipPath>
           </defs>
         </svg>
-        <div class="cart__text">0 ₽</div>
+        <div class="cart__text">{{ totalSum }} ₽</div>
       </div>
     </div>
   </div>
@@ -183,6 +183,11 @@
 <script>
 export default {
   name: "TheHeader",
+  computed: {
+    totalSum() {
+      return this.$store.getters.totalSum;
+    },
+  },
 };
 </script>
 
