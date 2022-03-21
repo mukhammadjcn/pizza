@@ -189,7 +189,7 @@
       <div class="cart__sumTotal">
         <span class="cart_withoutDiscount">
           Итого:
-          <span :class="discount ? 'discount-active' : ''"
+          <span :class="withDiscount > 0 ? 'discount-active' : ''"
             >{{ sumTotal }} ₽</span
           >
         </span>
@@ -252,6 +252,9 @@ export default {
   computed: {
     sumTotal() {
       return this.$store.getters.totalSum;
+    },
+    withDiscount() {
+      return this.$store.getters.withDiscount;
     },
   },
 };

@@ -46,7 +46,7 @@
         <div class="cart__sumTotal">
           <span class="cart_withoutDiscount">
             Итого:
-            <span :class="discount ? 'discount-active' : ''"
+            <span :class="withDiscount > 0 ? 'discount-active' : ''"
               >{{ sumTotal }} ₽</span
             >
           </span>
