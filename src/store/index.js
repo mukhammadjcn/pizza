@@ -75,6 +75,8 @@ export default createStore({
     },
     cart: [],
     totalSum: 0,
+    withDiscount: 0,
+    quantity: 0,
   },
   getters: {
     products(state) {
@@ -85,6 +87,12 @@ export default createStore({
     },
     totalSum(state) {
       return state.totalSum;
+    },
+    withDiscount(state) {
+      return state.withDiscount;
+    },
+    quantity(state) {
+      return state.quantity;
     },
   },
   mutations: {
@@ -110,6 +118,7 @@ export default createStore({
         state.cart.push(newItem);
         state.totalSum += product.price;
       }
+      state.quantity++;
     },
     plusProduct(state, payload) {
       const product = payload;
@@ -120,6 +129,7 @@ export default createStore({
       if (state.cart[productIndex].qty < 10) {
         state.cart[productIndex].qty++;
         state.totalSum += product.price;
+        state.quantity++;
       } else {
         alert("You can only order 10 for 1 item");
       }
@@ -133,9 +143,13 @@ export default createStore({
       if (state.cart[productIndex].qty > 1) {
         state.cart[productIndex].qty--;
         state.totalSum -= product.price;
+        state.quantity--;
       } else {
         alert("You have to order at least 1 item");
       }
+    },
+    discount(state) {
+      state.withDiscount = state.totalSum - state.totalSum / 4;
     },
   },
   actions: {
@@ -156,6 +170,9 @@ export default createStore({
         (el) => el.id === payload.id
       );
       context.commit("minusProduct", product);
+    },
+    discount(context) {
+      context.commit("discount");
     },
   },
   modules: {},

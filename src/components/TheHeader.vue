@@ -174,7 +174,7 @@
             </clipPath>
           </defs>
         </svg>
-        <div class="cart__text">{{ totalSum }} ₽</div>
+        <div class="cart__text">{{ quantity }}</div>
       </div>
     </div>
   </div>
@@ -184,8 +184,8 @@
 export default {
   name: "TheHeader",
   computed: {
-    totalSum() {
-      return this.$store.getters.totalSum;
+    quantity() {
+      return this.$store.getters.quantity;
     },
   },
 };
