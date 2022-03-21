@@ -55,14 +55,16 @@
           </span>
         </div>
       </div>
+      <TheOrder />
     </div>
   </div>
 </template>
 
 <script>
 import TheCartItem from "../components/TheCartItem.vue";
+import TheOrder from "@/components/TheOrder.vue";
 export default {
-  components: { TheCartItem },
+  components: { TheCartItem, TheOrder },
   data() {
     return {
       promocode: "",
@@ -74,7 +76,7 @@ export default {
       if (this.promocode == "Mukhammadjon") {
         if (this.$store.getters.totalSum >= 1199) {
           alert("You get 25% discount super");
-          this.$store.dispatch("discount");
+          this.$store.dispatch("discount", {percent : 25});
         } else {
           alert("In order to get diskount you should buy more 1199 ₽");
         }

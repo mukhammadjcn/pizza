@@ -77,6 +77,7 @@ export default createStore({
     totalSum: 0,
     withDiscount: 0,
     quantity: 0,
+    address: null,
   },
   getters: {
     products(state) {
@@ -93,6 +94,9 @@ export default createStore({
     },
     quantity(state) {
       return state.quantity;
+    },
+    address(state) {
+      return state.address;
     },
   },
   mutations: {
@@ -148,8 +152,12 @@ export default createStore({
         alert("You have to order at least 1 item");
       }
     },
-    discount(state) {
-      state.withDiscount = state.totalSum - state.totalSum / 4;
+    discount(state, payload) {
+      state.withDiscount =
+        state.totalSum - (state.totalSum * payload.percent) / 100;
+    },
+    orderAdress(state, payload) {
+      state.address = payload;
     },
   },
   actions: {
@@ -171,8 +179,11 @@ export default createStore({
       );
       context.commit("minusProduct", product);
     },
-    discount(context) {
-      context.commit("discount");
+    discount(context, payload) {
+      context.commit("discount", payload);
+    },
+    orderAdress(context, payload) {
+      context.commit("orderAdress", payload);
     },
   },
   modules: {},
