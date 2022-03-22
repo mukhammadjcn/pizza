@@ -217,10 +217,10 @@ export default {
       schema: Yup.object().shape({
         firstName: Yup.string().required("First Name is required"),
         number: Yup.string()
-          // .min(13)
-          // .max(13)
-          .required("Please enter valid number"),
-        // .matches(/^\+998/, "Start with +998"),
+          .min(13)
+          .max(13)
+          .required("Please enter valid number")
+        .matches(/^\+998/, "Start with +998"),
         email: Yup.string()
           .required("Email is required")
           .email("Email is invalid"),
