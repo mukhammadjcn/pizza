@@ -33,7 +33,7 @@
           <div class="invalid-feedback">{{ errors.number }}</div>
         </div>
         <div class="">
-          <label for="email">Имя*</label>
+          <label for="email">Почта*</label>
           <Field
             name="email"
             id="email"
@@ -244,9 +244,14 @@ export default {
     },
     onSubmit(values) {
       // display form values on success
-      const sendValues = JSON.stringify(values, null, 4);
-      alert("SUCCESS!! :-)\n\n" + sendValues);
-      this.$store.dispatch("orderAdress", values);
+      if (this.sumTotal > 0) {
+        const sendValues = JSON.stringify(values, null, 4);
+        alert("SUCCESS!! :-)\n\n" + sendValues);
+        this.$store.dispatch("orderAdress", values);
+        this.$emit("showModal");
+      } else {
+        alert("Buy something first");
+      }
     },
   },
   computed: {
@@ -304,6 +309,7 @@ export default {
 
       label {
         margin: auto;
+        cursor: pointer;
       }
       input {
         vertical-align: middle;
@@ -337,6 +343,7 @@ export default {
     margin-top: 20px;
 
     button {
+      cursor: pointer;
       border: none;
       padding: 14px 24px;
       font-weight: 400;

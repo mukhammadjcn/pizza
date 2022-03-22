@@ -55,19 +55,24 @@
           </span>
         </div>
       </div>
-      <TheOrder />
+      <KeepAlive :is="view">
+        <TheOrder @showModal="showModalFunc" />
+      </KeepAlive>
     </div>
+    <TheVerificationModal v-if="showModal" @closeModal="closeModal" />
   </div>
 </template>
 
 <script>
 import TheCartItem from "../components/TheCartItem.vue";
 import TheOrder from "@/components/TheOrder.vue";
+import TheVerificationModal from "@/components/TheVerificationModal.vue";
 export default {
-  components: { TheCartItem, TheOrder },
+  components: { TheCartItem, TheOrder, TheVerificationModal },
   data() {
     return {
       promocode: "",
+      showModal: false,
     };
   },
   methods: {
@@ -76,7 +81,7 @@ export default {
       if (this.promocode == "Mukhammadjon") {
         if (this.$store.getters.totalSum >= 1199) {
           alert("You get 25% discount super");
-          this.$store.dispatch("discount", {percent : 25});
+          this.$store.dispatch("discount", { percent: 25 });
         } else {
           alert("In order to get diskount you should buy more 1199 ₽");
         }
@@ -85,6 +90,16 @@ export default {
         alert("Please enter enter valid Promocode");
         this.promocode = "";
       }
+    },
+    closeModal() {
+      this.showModal = false;
+      document.body.style.overflow = "auto";
+    },
+    showModalFunc() {
+      this.showModal = true;
+      document.body.scrollTop = 0; // For Safari
+      document.documentElement.scrollTop = 0; // For Chrome, Firefox, IE and Opera
+      document.body.style.overflow = "hidden";
     },
   },
   computed: {

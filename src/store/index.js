@@ -98,6 +98,9 @@ export default createStore({
     address(state) {
       return state.address;
     },
+    getNumber(state){
+      return state.address.number
+    }
   },
   mutations: {
     addProductToCart(state, payload) {
