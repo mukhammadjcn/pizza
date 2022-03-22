@@ -4,6 +4,8 @@ import App from "./App.vue";
 import router from "./router";
 import store from "./store";
 import firebase from "firebase";
+import Vue3Lottie from "vue3-lottie";
+import "vue3-lottie/dist/style.css";
 
 const firebaseConfig = {
   apiKey: "AIzaSyBiwwhNIbZoDLr57dClkN-QaLSyko8ARD4",
@@ -18,4 +20,4 @@ const firebaseConfig = {
 // Initialize Firebase
 firebase.initializeApp(firebaseConfig);
 
-createApp(App).use(store).use(router).mount("#app");
+createApp(App).use(store).use(Vue3Lottie).use(router).mount("#app");

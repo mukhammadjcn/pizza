@@ -1,6 +1,7 @@
 import { createRouter, createWebHistory } from "vue-router";
 import HomeView from "../views/HomeView.vue";
 import TheCart from "../views/TheCart.vue";
+import TheOrdered from "../views/TheOrdered.vue";
 
 const routes = [
   {
@@ -12,6 +13,11 @@ const routes = [
     path: "/cart",
     name: "cart",
     component: TheCart,
+  },
+  {
+    path: "/ordered",
+    name: "order",
+    component: TheOrdered,
   },
 ];
 

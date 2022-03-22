@@ -2,9 +2,15 @@
   <div class="verification">
     <div class="verification__container">
       <div class="verification__box">
-        <h1 class="verification__title">Вход в аккаунт</h1>
+        <h1 class="verification__title">
+          {{ !smsSent ? "Вход в аккаунт" : "Код из смс" }}
+        </h1>
         <p class="verification__label">
-          Сможете быстро оформлять заказы, использовать бонусы
+          {{
+            !smsSent
+              ? "Сможете быстро оформлять заказы, использовать бонусы"
+              : `На номер ${getNumber}`
+          }}
         </p>
         <form @submit.prevent="submit" v-if="!smsSent">
           <div class="verification__phone">
@@ -132,6 +138,7 @@ export default {
           var user = result.user;
           console.log(user);
           this.closeModalFunc();
+          this.$router.push("/ordered");
         })
         .catch((error) => {
           console.log(error);
