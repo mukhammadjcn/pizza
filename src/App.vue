@@ -7,8 +7,20 @@
 <script>
 import TheFooter from "./components/TheFooter.vue";
 import TheHeader from "./components/TheHeader.vue";
+import { useToast } from "vue-toastification";
+
 export default {
   components: { TheHeader, TheFooter },
+  setup() {
+    const toast = useToast();
+    return { toast };
+  },
+
+  methods: {
+    myMethod() {
+      this.toast.success("I'm an info toast!");
+    },
+  },
 };
 </script>
 

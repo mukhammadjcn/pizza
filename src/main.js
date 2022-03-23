@@ -5,8 +5,11 @@ import router from "./router";
 import store from "./store";
 import firebase from "firebase";
 import Vue3Lottie from "vue3-lottie";
+import Toast from "vue-toastification";
+import "vue-toastification/dist/index.css";
 import "vue3-lottie/dist/style.css";
 
+// Firebase configuration
 const firebaseConfig = {
   apiKey: "AIzaSyBiwwhNIbZoDLr57dClkN-QaLSyko8ARD4",
   authDomain: "phone-number-verificatio-2caee.firebaseapp.com",
@@ -17,7 +20,28 @@ const firebaseConfig = {
   measurementId: "G-DWW7QN849E",
 };
 
+// Vue toast configuarion
+const options = {
+  position: "top-right",
+  timeout: 3000,
+  closeOnClick: true,
+  pauseOnFocusLoss: true,
+  pauseOnHover: true,
+  draggable: true,
+  draggablePercent: 0.6,
+  showCloseButtonOnHover: false,
+  hideProgressBar: false,
+  closeButton: "button",
+  icon: true,
+  rtl: false,
+};
+
 // Initialize Firebase
 firebase.initializeApp(firebaseConfig);
 
-createApp(App).use(store).use(Vue3Lottie).use(router).mount("#app");
+createApp(App)
+  .use(store)
+  .use(Vue3Lottie)
+  .use(Toast, options)
+  .use(router)
+  .mount("#app");

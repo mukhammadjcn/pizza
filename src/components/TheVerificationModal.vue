@@ -84,6 +84,8 @@
 
 <script>
 import firebase from "firebase";
+import axios from "axios";
+import { useToast } from "vue-toastification";
 
 export default {
   data() {
@@ -97,14 +99,18 @@ export default {
       smsSent: false,
     };
   },
+  setup() {
+    const toast = useToast();
+    return { toast };
+  },
   mounted() {
     firebase.auth().useDeviceLanguage();
     this.recaptchaVerifier = new firebase.auth.RecaptchaVerifier("log-in", {
       size: "invisible",
-      callback: (response) => {
-        // reCAPTCHA solved, allow signInWithPhoneNumber.
-        console.log(response);
-      },
+      // callback: (response) => {
+      //   // reCAPTCHA solved, allow signInWithPhoneNumber.
+      //   console.log(response);
+      // },
     });
   },
   methods: {
@@ -121,27 +127,48 @@ export default {
         .auth()
         .signInWithPhoneNumber(number, this.recaptchaVerifier)
         .then((confirmationResult) => {
+          this.toast.success("Sms Sent!");
           this.confirmResult = confirmationResult;
-          console.log(this.confirmResult);
-          alert("Sms Sent!");
           this.smsSent = true;
         })
         .catch((error) => {
-          console.log("Sms not sent", error.message);
+          this.toast.error(`Sms not sent", ${error.message}`);
         });
     },
     verifyCode() {
-      this.confirmResult
-        .confirm(this.otpnum)
-        .then((result) => {
-          alert("Registeration Successfull!", result);
-          var user = result.user;
-          console.log(user);
-          this.closeModalFunc();
-          this.$router.push("/ordered");
+      if (this.otpnum) {
+        this.confirmResult
+          .confirm(this.otpnum)
+          .then(() => {
+            this.toast.success(`Succesfully ordered"`);
+            this.sendOrder();
+            this.closeModalFunc();
+            this.$store.dispatch("restore", {
+              cart: [],
+              totalSum: 0,
+              withDiscount: 0,
+              quantity: 0,
+              address: null,
+            });
+            this.$router.push("/ordered");
+          })
+          .catch((error) => {
+            this.toast.error(`Sms not sent", ${error.message}`);
+          });
+      } else {
+        this.toast.error(`Enter OTP number`);
+      }
+    },
+    sendOrder() {
+      axios
+        .post("https://sheetdb.io/api/v1/43moshti6apba", {
+          data: this.order,
+        })
+        .then(() => {
+          this.toast.success("Your order sendded to our Branch");
         })
         .catch((error) => {
-          console.log(error);
+          this.toast.error("Something went wrong: " + error.response.status);
         });
     },
     closeModalFunc() {
@@ -151,6 +178,9 @@ export default {
   computed: {
     getNumber() {
       return this.$store.getters.getNumber;
+    },
+    order() {
+      return this.$store.getters.address;
     },
   },
 };

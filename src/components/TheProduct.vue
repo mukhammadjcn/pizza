@@ -18,13 +18,20 @@
 </template>
 
 <script>
+import { useToast } from "vue-toastification";
+
 export default {
   props: ["name", "price", "img", "info", "label", "id"],
+  setup() {
+    const toast = useToast();
+    return { toast };
+  },
   methods: {
     addToCart() {
       this.$store.dispatch("addToCart", {
         id: this.id,
       });
+      this.toast.success("Product added to cart )");
     },
   },
 };

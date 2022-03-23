@@ -67,6 +67,8 @@
 import TheCartItem from "../components/TheCartItem.vue";
 import TheOrder from "@/components/TheOrder.vue";
 import TheVerificationModal from "@/components/TheVerificationModal.vue";
+import { useToast } from "vue-toastification";
+
 export default {
   components: { TheCartItem, TheOrder, TheVerificationModal },
   data() {
@@ -75,19 +77,25 @@ export default {
       showModal: false,
     };
   },
+  setup() {
+    const toast = useToast();
+    return { toast };
+  },
   methods: {
     usePromo() {
       // console.log(this.$store.getters.sumTotal);
       if (this.promocode == "Mukhammadjon") {
         if (this.$store.getters.totalSum >= 1199) {
-          alert("You get 25% discount super");
+          this.toast.info("You get super - 25% discount");
           this.$store.dispatch("discount", { percent: 25 });
         } else {
-          alert("In order to get diskount you should buy more 1199 ₽");
+          this.toast.warning(
+            "In order to get discount you should buy more 1199 ₽"
+          );
         }
         this.promocode = "";
       } else {
-        alert("Please enter enter valid Promocode");
+        this.toast.error("Please enter enter valid Promocode");
         this.promocode = "";
       }
     },

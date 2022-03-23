@@ -14,7 +14,6 @@
             name="firstName"
             id="firstName"
             type="text"
-            class="form-control"
             placeholder="Алексей"
             :class="{ 'is-invalid': errors.firstName }"
           />
@@ -26,7 +25,6 @@
             name="number"
             id="number"
             type="text"
-            class="form-control"
             placeholder="+998"
             :class="{ 'is-invalid': errors.number }"
           />
@@ -38,7 +36,6 @@
             name="email"
             id="email"
             type="text"
-            class="form-control"
             placeholder="Почта"
             :class="{ 'is-invalid': errors.email }"
           />
@@ -56,7 +53,6 @@
             name="street"
             id="street"
             type="text"
-            class="form-control"
             placeholder="Пушкина"
             :class="{ 'is-invalid': errors.street }"
           />
@@ -70,7 +66,6 @@
             name="hause"
             id="hause"
             type="text"
-            class="form-control"
             placeholder="1a"
             :class="{ 'is-invalid': errors.hause }"
           />
@@ -82,7 +77,6 @@
             name="hauseStreet"
             id="hauseStreet"
             type="text"
-            class="form-control"
             placeholder="1"
             :class="{ 'is-invalid': errors.hauseStreet }"
           />
@@ -94,7 +88,6 @@
             name="floor"
             id="floor"
             type="text"
-            class="form-control"
             placeholder="2"
             :class="{ 'is-invalid': errors.floor }"
           />
@@ -106,7 +99,6 @@
             name="hauseNumber"
             id="hauseNumber"
             type="text"
-            class="form-control"
             placeholder="3"
             :class="{ 'is-invalid': errors.hauseNumber }"
           />
@@ -118,7 +110,6 @@
             name="hausePhone"
             id="hausePhone"
             type="text"
-            class="form-control"
             placeholder="0000"
             :class="{ 'is-invalid': errors.hausePhone }"
           />
@@ -135,7 +126,6 @@
           <Field
             name="payment"
             id="cash"
-            class="form-control"
             type="radio"
             value="cash"
             :class="{ 'is-invalid': errors.payment }"
@@ -146,7 +136,6 @@
           <Field
             name="payment"
             id="creditCard"
-            class="form-control"
             type="radio"
             value="creditCard"
             :class="{ 'is-invalid': errors.payment }"
@@ -157,7 +146,6 @@
           <Field
             name="payment"
             id="AppleCard"
-            class="form-control"
             type="radio"
             value="AppleCard"
             :class="{ 'is-invalid': errors.payment }"
@@ -173,10 +161,10 @@
         <div class="order__comments">
           <label for="comments">Улица*</label>
           <Field
+            as="textarea"
             name="comments"
             id="comments"
             type="textarea"
-            class="form-control"
             placeholder="Есть уточнения?"
             :class="{ 'is-invalid': errors.comments }"
           />
@@ -205,6 +193,7 @@
 
 <script>
 import { Form, Field } from "vee-validate";
+import { useToast } from "vue-toastification";
 import * as Yup from "yup";
 
 export default {
@@ -214,13 +203,14 @@ export default {
   },
   data() {
     return {
+      // Validation for form
       schema: Yup.object().shape({
         firstName: Yup.string().required("First Name is required"),
         number: Yup.string()
           .min(13)
           .max(13)
           .required("Please enter valid number")
-        .matches(/^\+998/, "Start with +998"),
+          .matches(/^\+998/, "Start with +998"),
         email: Yup.string()
           .required("Email is required")
           .email("Email is invalid"),
@@ -238,16 +228,32 @@ export default {
       }),
     };
   },
+  setup() {
+    const toast = useToast();
+    return { toast };
+  },
   methods: {
     onSubmit(values) {
       // display form values on success
+      const orderData = {
+        Name: `${values.firstName}`,
+        Phone: `${values.number}`,
+        Email: `${values.email}`,
+        Street: `${values.street}`,
+        Number: `${values.hause}`,
+        Payment: `${values.payment}`,
+        Comments: `${values.comments}`,
+        Date: `${new Date().toISOString()}`,
+        Cart: `${JSON.stringify(this.getCart)}`,
+        TotalSum: `${this.sumTotal}`,
+        WithDiscount: `${this.withDiscount}`,
+        isDiscount: `${this.withDiscount > 0 ? "true" : "false"}`,
+      };
       if (this.sumTotal > 0) {
-        const sendValues = JSON.stringify(values, null, 4);
-        alert("SUCCESS!! :-)\n\n" + sendValues);
-        this.$store.dispatch("orderAdress", values);
+        this.$store.dispatch("orderAdress", orderData);
         this.$emit("showModal");
       } else {
-        alert("Buy something first");
+        this.toast.error("Buy something first");
       }
     },
   },
@@ -257,6 +263,9 @@ export default {
     },
     withDiscount() {
       return this.$store.getters.withDiscount;
+    },
+    getCart() {
+      return this.$store.getters.cart;
     },
   },
 };
@@ -333,6 +342,15 @@ export default {
     }
   }
 
+  &__comments {
+    textarea {
+      height: 148px;
+      padding: 14px 16px;
+      border: 1px solid #f0f0f0;
+      border-radius: 6px;
+      outline: none;
+    }
+  }
   &__submit {
     display: flex;
     align-items: center;

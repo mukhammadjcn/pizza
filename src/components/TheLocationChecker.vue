@@ -29,6 +29,7 @@
 
 <script>
 import axios from "axios";
+import { useToast } from "vue-toastification";
 
 export default {
   data() {
@@ -36,9 +37,17 @@ export default {
       location: "",
     };
   },
+  setup() {
+    const toast = useToast();
+    return { toast };
+  },
   methods: {
     showLocation() {
-      alert(this.location);
+      if (this.location) {
+        this.toast.info(`We work in ${this.location}`);
+      } else {
+        this.getLocation();
+      }
     },
     getLocation() {
       navigator.geolocation.getCurrentPosition((positon) => {
@@ -64,10 +73,12 @@ export default {
             .split(" ")
             .filter((el, index) => index > 0)
             .join(" ");
-          alert(this.location);
+          this.toast.success("Your location succesfully detected");
         })
-        .catch(function (error) {
-          console.error(error);
+        .catch((error) => {
+          this.toast.error(
+            `Something went wrong, Error code - ${error.response.status}`
+          );
         });
     },
   },

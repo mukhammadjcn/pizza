@@ -98,9 +98,9 @@ export default createStore({
     address(state) {
       return state.address;
     },
-    getNumber(state){
-      return state.address.number
-    }
+    getNumber(state) {
+      return state.address.Phone;
+    },
   },
   mutations: {
     addProductToCart(state, payload) {
@@ -162,6 +162,13 @@ export default createStore({
     orderAdress(state, payload) {
       state.address = payload;
     },
+    restoreStore(state, payload) {
+      state.cart = payload.cart;
+      state.totalSum = payload.totalSum;
+      state.withDiscount = payload.withDiscount;
+      state.quantity = payload.quantity;
+      state.address = payload.address;
+    },
   },
   actions: {
     addToCart(context, payload) {
@@ -188,6 +195,9 @@ export default createStore({
     orderAdress(context, payload) {
       context.commit("orderAdress", payload);
     },
+    restore(context, payload){
+      context.commit('restoreStore', payload)
+    }
   },
   modules: {},
 });
