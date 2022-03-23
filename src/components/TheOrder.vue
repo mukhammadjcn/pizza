@@ -410,4 +410,11 @@ export default {
     }
   }
 }
+
+@media (max-width: 600px) {
+  .order__submit {
+    flex-direction: column;
+    gap: 16px;
+  }
+}
 </style>
