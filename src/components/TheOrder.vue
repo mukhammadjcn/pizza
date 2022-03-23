@@ -398,4 +398,16 @@ export default {
   margin: 4px;
   color: #e74a4a;
 }
+
+@media (max-width: 860px) {
+  .order {
+    &__first {
+      flex-wrap: wrap;
+      justify-content: flex-start;
+      .order__mini {
+        width: 30%;
+      }
+    }
+  }
+}
 </style>

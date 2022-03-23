@@ -3,6 +3,7 @@
     <span class="location-checker__label">Проверить адрес доставки</span>
     <div class="location-checker__input">
       <svg
+        class="location-logo"
         @click="getLocation()"
         width="20"
         height="20"
@@ -20,6 +21,21 @@
         />
       </svg>
       <input type="text" placeholder="Адрес" v-model="location" />
+      <svg
+        @click="showLocation()"
+        class="location-checker-btn"
+        width="44"
+        height="44"
+        viewBox="0 0 44 44"
+        fill="none"
+        xmlns="http://www.w3.org/2000/svg"
+      >
+        <rect width="44" height="44" rx="6" fill="#FF7010" />
+        <path
+          d="M29.0471 20.5942L16.1379 15.3174C15.5941 15.0951 14.9797 15.1929 14.5345 15.5725C14.0894 15.9522 13.9032 16.5372 14.0487 17.0993L15.1977 21.5382H20.8235C21.0824 21.5382 21.2923 21.7449 21.2923 22C21.2923 22.255 21.0824 22.4618 20.8235 22.4618H15.1977L14.0487 26.9006C13.9032 27.4627 14.0893 28.0477 14.5345 28.4274C14.9806 28.8078 15.595 28.9044 16.138 28.6825L29.0472 23.4057C29.6349 23.1655 30 22.6268 30 22C30 21.3731 29.6349 20.8344 29.0471 20.5942Z"
+          fill="white"
+        />
+      </svg>
     </div>
     <button class="location-checker__btn" @click="showLocation()">
       Проверить
@@ -105,7 +121,7 @@ export default {
     height: 48px;
     flex-grow: 1;
 
-    svg {
+    .location-logo {
       position: absolute;
       left: 12px;
       top: 50%;
@@ -140,6 +156,37 @@ export default {
     border-radius: 6px;
     border: none;
     cursor: pointer;
+  }
+
+  &-btn {
+    display: none;
+    cursor: pointer;
+  }
+}
+
+@media (max-width: 876px) {
+  .location-checker {
+    flex-direction: column;
+
+    &__label {
+      font-weight: 500;
+    }
+
+    &__btn {
+      display: none;
+    }
+
+    &-btn {
+      display: block;
+      position: absolute;
+      top: 0;
+      height: 100%;
+      right: 2.1px;
+    }
+
+    &__input {
+      width: 100%;
+    }
   }
 }
 </style>

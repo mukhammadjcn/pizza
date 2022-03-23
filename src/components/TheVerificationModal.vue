@@ -189,6 +189,7 @@ export default {
 <style lang="scss">
 .verification {
   position: absolute;
+  z-index: 3;
   top: 0;
   left: 0;
   width: 100vw;
@@ -302,6 +303,27 @@ export default {
     background: none;
     border: none;
     cursor: pointer;
+  }
+}
+
+@media (max-width: 860px) {
+  .verification {
+    &__container {
+      max-width: 90%;
+    }
+
+    &__close {
+      right: 0;
+      top: -60px;
+    }
+  }
+}
+
+@media (max-width: 410px) {
+  .verification {
+    &__box {
+      width: auto;
+    }
   }
 }
 </style>

@@ -94,6 +94,7 @@ export default {
     align-items: center;
     justify-content: space-between;
   }
+
   &__add {
     padding: 14px 32px;
     background: #ff7010;
@@ -111,6 +112,30 @@ export default {
     font-size: 18px;
     line-height: 24px;
     color: #ff7010;
+  }
+}
+
+@media (max-width: 1280px) {
+  .product {
+    width: auto;
+    flex-basis: 32%;
+    align-self: flex-start;
+  }
+}
+
+@media (max-width: 1120px) {
+  .product {
+    flex-basis: 45%;
+    &__img img {
+      object-fit: contain;
+    }
+  }
+}
+
+@media (max-width: 776px) {
+  .product {
+    width: 100%;
+    flex-basis: 100%;
   }
 }
 </style>

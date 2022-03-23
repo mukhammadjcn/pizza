@@ -1,5 +1,5 @@
 <template>
-  <div class="reels">
+  <div class="reels" id="checkLocation">
     <div class="reel" v-for="item in list" :key="item.id">
       <img :src="item.img" alt="" />
       <p class="reel__info">{{ item.text }}</p>
@@ -38,6 +38,21 @@ export default {
       font-size: 20px;
       line-height: 28px;
       color: white;
+    }
+  }
+}
+
+@media (max-width: 1280px) {
+  .reels {
+    gap: 20px;
+    overflow: scroll;
+    &::-webkit-scrollbar {
+      display: none;
+    }
+    .reel {
+      width: 280px;
+      height: 320px;
+      flex-shrink: 0;
     }
   }
 }

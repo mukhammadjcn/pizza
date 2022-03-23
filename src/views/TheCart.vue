@@ -201,4 +201,16 @@ export default {
     transition: 0.2s ease-in-out;
   }
 }
+
+@media (max-width: 860px) {
+  .cart {
+    &__container {
+      width: 94%;
+    }
+    &__sum {
+      flex-direction: column-reverse;
+      gap: 24px;
+    }
+  }
+}
 </style>

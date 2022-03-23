@@ -40,4 +40,25 @@ export default {
     }
   }
 }
+
+@media (max-width: 1280px) {
+  .menu {
+    gap: 16px;
+    overflow: scroll;
+    &::-webkit-scrollbar {
+      display: none;
+    }
+  }
+}
+
+@media (max-width: 776px) {
+  .menu {
+    padding: 20px 0;
+    &__item {
+      padding: 8px 16px;
+      flex-direction: revert;
+      gap: 12px;
+    }
+  }
+}
 </style>

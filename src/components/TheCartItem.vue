@@ -1,19 +1,21 @@
 <template>
   <div class="cart-item">
-    <div class="cart-item__info">
+    <div class="cart-item__img">
       <img :src="img" alt="" />
+    </div>
+    <div class="cart-item__info">
       <div class="">
         <h4 class="cart-item__name">{{ name }}</h4>
         <p class="cart-item__size">Традиционное тесто, 23 см</p>
       </div>
-    </div>
-    <div class="cart-item__action">
-      <div class="cart-item__number">
-        <button @click="minusItem">-</button>
-        <span>{{ qty }}</span>
-        <button @click="plusItem">+</button>
+      <div class="cart-item__action">
+        <div class="cart-item__number">
+          <button @click="minusItem">-</button>
+          <span>{{ qty }}</span>
+          <button @click="plusItem">+</button>
+        </div>
+        <span class="cart-item__total">{{ qty * price }} ₽</span>
       </div>
-      <span class="cart-item__total">{{ qty * price }} ₽</span>
     </div>
   </div>
 </template>
@@ -32,7 +34,6 @@ export default {
         id: this.id,
       });
     },
-    
   },
 };
 </script>
@@ -45,19 +46,20 @@ export default {
   background: white;
   display: flex;
   align-items: center;
-  justify-content: space-between;
+  gap: 16px;
 
   &__info {
     display: flex;
     align-items: center;
     gap: 16px;
+    flex-grow: 1;
+    justify-content: space-around;
     color: #191919;
-
-    img {
-      width: 120px;
-      height: 120px;
-      border-radius: 50%;
-    }
+  }
+  &__img img {
+    width: 120px;
+    height: 120px;
+    border-radius: 50%;
   }
 
   &__action {
@@ -112,6 +114,16 @@ export default {
     font-size: 20px;
     line-height: 28px;
     color: #ff7010;
+  }
+}
+
+@media (max-width: 860px) {
+  .cart-item {
+    gap: 0;
+    &__info {
+      flex-direction: column;
+      gap: 12px;
+    }
   }
 }
 </style>

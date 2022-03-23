@@ -77,7 +77,7 @@
               />
             </svg>
           </router-link>
-          <p class="copyright">© Copyright 2021 — Куда Пицца</p>
+          <p class="copyright-1">© Copyright 2021 — Куда Пицца</p>
         </div>
         <div class="footer__nav-item">
           <li>Куда пицца</li>
@@ -162,6 +162,7 @@
             </a>
           </li>
         </div>
+        <p class="copyright-2">© Copyright 2021 — Куда Пицца</p>
       </nav>
     </div>
   </footer>
@@ -203,6 +204,9 @@ export default {};
     font-size: 16px;
     line-height: 22px;
     color: #191919;
+    &-2 {
+      display: none;
+    }
   }
 
   .phone,
@@ -222,6 +226,27 @@ export default {};
       align-items: center;
       gap: 10px;
       color: #191919;
+    }
+  }
+}
+
+@media (max-width: 1040px) {
+  .footer {
+    &__nav {
+      flex-direction: column;
+      gap: 24px;
+      &-item {
+        gap: 16px;
+      }
+    }
+
+    .copyright {
+      &-1 {
+        display: none;
+      }
+      &-2 {
+        display: block;
+      }
     }
   }
 }

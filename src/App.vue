@@ -48,4 +48,21 @@ export default {
   align-items: center;
   justify-content: center;
 }
+
+@media (max-width: 1280px) {
+  .container {
+    max-width: 94%;
+  }
+}
+
+@media (max-width: 600px) {
+  .Vue-Toastification__container {
+    top: 12px !important;
+    align-items: center !important;
+    .Vue-Toastification__toast {
+      width: 90% !important;
+      border-radius: 12px !important;
+    }
+  }
+}
 </style>

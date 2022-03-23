@@ -52,4 +52,16 @@ export default {
   flex-wrap: wrap;
   justify-content: space-between;
 }
+
+@media (max-width: 1120px) {
+  .products__list {
+    justify-content: space-around;
+  }
+}
+
+@media (max-width: 776px) {
+  .products__list {
+    flex-direction: column;
+  }
+}
 </style>
