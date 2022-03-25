@@ -7,7 +7,7 @@
     <div class="product__details">
       <h2 class="product__name">{{ name }}</h2>
       <p class="product__info">
-        {{ `${info.split("").splice(0, 55).join("")}...` }}
+        {{ `${info.split("").splice(0, 55).join("")}` }}
       </p>
       <div class="product__action">
         <button class="product__add" @click="addToCart">Выбрать</button>
