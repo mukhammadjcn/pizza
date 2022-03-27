@@ -201,7 +201,7 @@
         </div>
       </div>
 
-      <div class="cart flex" @click="this.$router.push('/cart')">
+      <div class="cart flex" @click="pushCart()">
         <svg
           width="24"
           height="24"
@@ -426,6 +426,11 @@ export default {
         document.body.style.overflowY = "auto";
         this.showNavbar = !this.showNavbar;
       }
+    },
+    pushCart() {
+      document.body.scrollTop = 0; // For Safari
+      document.documentElement.scrollTop = 0; // For Chrome, Firefox, IE and Opera
+      this.$router.push("/cart");
     },
   },
   mounted() {

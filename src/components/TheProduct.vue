@@ -10,28 +10,41 @@
         {{ `${info.split("").splice(0, 55).join("")}` }}
       </p>
       <div class="product__action">
-        <button class="product__add" @click="addToCart">Выбрать</button>
+        <button class="product__add" @click="showModal">Выбрать</button>
         <span class="product__price">{{ `от ${price} ₽` }}</span>
       </div>
     </div>
   </div>
+  <TheProductModal
+    v-if="productModal"
+    @closeModal="closeModal"
+    :name="name"
+    :price="price"
+    :img="img"
+    :label="label"
+    :id="id"
+  />
 </template>
 
 <script>
-import { useToast } from "vue-toastification";
+import TheProductModal from "./TheProductModal.vue";
 
 export default {
+  components: { TheProductModal },
   props: ["name", "price", "img", "info", "label", "id"],
-  setup() {
-    const toast = useToast();
-    return { toast };
+  data() {
+    return {
+      productModal: false,
+    };
   },
   methods: {
-    addToCart() {
-      this.$store.dispatch("addToCart", {
-        id: this.id,
-      });
-      this.toast.success("Product added to cart )");
+    showModal() {
+      this.productModal = true;
+      document.body.style.overflow = "hidden";
+    },
+    closeModal() {
+      this.productModal = false;
+      document.body.style.overflow = "auto";
     },
   },
 };
