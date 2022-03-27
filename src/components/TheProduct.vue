@@ -149,6 +149,10 @@ export default {
   .product {
     width: 100%;
     flex-basis: 100%;
+
+    &__img {
+      height: 180px;
+    }
   }
 }
 </style>

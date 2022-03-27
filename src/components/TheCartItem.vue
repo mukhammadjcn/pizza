@@ -124,6 +124,19 @@ export default {
       flex-direction: column;
       gap: 12px;
     }
+    &__img img {
+      width: 100px;
+      height: 100px;
+    }
+    &__name {
+      font-size: 16px;
+      line-height: 20px;
+      height: 20px;
+      overflow: hidden;
+    }
+    &__title {
+      font-size: 32px;
+    }
   }
 }
 </style>

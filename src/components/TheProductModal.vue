@@ -158,9 +158,9 @@
               id="shape1"
               v-model="shape"
             />
-            <label for="shape1">Традиционное</label>
+            <label for="shape1" style="flex-basis: 50%">Традиционное</label>
             <input type="radio" value="Тонкое" id="shape2" v-model="shape" />
-            <label for="shape2">Тонкое</label>
+            <label for="shape2" style="flex-basis: 50%">Тонкое</label>
           </div>
           <!-- size -->
           <div class="product-modal__radio-buttons">
@@ -320,9 +320,8 @@
                 value="Сладкий перец"
                 id="Сладкий перец"
                 v-model="addIngredient"
-                @click="addIngredientItem(4)"
               />
-              <label for="Сладкий перец">
+              <label for="Сладкий перец" @click="addIngredientItem(4)">
                 <div class="product-modal__ingredients-box">
                   <svg
                     width="35"
@@ -585,12 +584,11 @@ export default {
 
     label {
       cursor: pointer;
-      position: relative;
       & > svg {
         visibility: hidden;
         position: absolute;
         top: 8px;
-        right: -4px;
+        right: 8px;
       }
     }
 
@@ -638,6 +636,49 @@ export default {
       line-height: 22px;
       color: white;
       border: none;
+    }
+  }
+}
+
+@media (max-width: 600px) {
+  .product-modal {
+    overflow: scroll;
+    &__box {
+      flex-direction: column;
+      gap: 18px;
+    }
+    &__image {
+      width: 260px;
+      height: 260px;
+    }
+    &__container {
+      padding: 20px;
+      width: 100%;
+      margin-top: 260px;
+      border-radius: 16px 16px 0 0;
+    }
+    form {
+      max-width: 100%;
+      & > h2 {
+        font-weight: 600;
+        font-size: 18px;
+        line-height: 22px;
+      }
+    }
+    &__ingredients,
+    &__radio-ingredients {
+      overflow: scroll;
+      &::-webkit-scrollbar {
+        display: none;
+      }
+    }
+    &__submit {
+      margin: 24px 0 12px;
+    }
+    &__close {
+      position: absolute;
+      top: -60px;
+      right: 20px;
     }
   }
 }
