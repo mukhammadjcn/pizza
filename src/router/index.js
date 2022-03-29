@@ -2,6 +2,7 @@ import { createRouter, createWebHistory } from "vue-router";
 import HomeView from "../views/HomeView.vue";
 import TheCart from "../views/TheCart.vue";
 import TheOrdered from "../views/TheOrdered.vue";
+import NotFound from "../views/NotFound.vue";
 
 const routes = [
   {
@@ -18,6 +19,15 @@ const routes = [
     path: "/ordered",
     name: "order",
     component: TheOrdered,
+  },
+  {
+    path: "/404",
+    name: "notFound",
+    component: NotFound,
+  },
+  {
+    path: "/:pathMatch(.*)",
+    redirect: '/404',
   },
 ];
 

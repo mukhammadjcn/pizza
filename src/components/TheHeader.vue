@@ -149,13 +149,13 @@
 
         <div class="header__nav" v-if="height > 670">
           <a href="#promotion">Акции</a>
-          <a href="#pizza">Пицца</a>
-          <a href="#sushi">Суши</a>
-          <a href="#drink">Напитки</a>
-          <a href="#snack">Закуски</a>
-          <a href="#combi">Комбо</a>
-          <a href="#desert">Десерты</a>
-          <a href="#sousage">Соусы</a>
+          <a href="#Пицца">Пицца</a>
+          <a href="#Суши">Суши</a>
+          <a href="#Напитки">Напитки</a>
+          <a href="#Закуски">Закуски</a>
+          <a href="#Комбо">Комбо</a>
+          <a href="#Десерты">Десерты</a>
+          <a href="#Соусы">Соусы</a>
           <div class="header__option-container">
             <div class="flex" @click="showOption">
               <span style="cursor: pointer">Другое </span>
