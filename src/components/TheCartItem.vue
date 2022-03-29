@@ -53,7 +53,7 @@ export default {
     align-items: center;
     gap: 16px;
     flex-grow: 1;
-    justify-content: space-around;
+    justify-content: space-between;
     color: #191919;
   }
   &__img img {

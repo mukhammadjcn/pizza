@@ -55,9 +55,7 @@
           </span>
         </div>
       </div>
-      <KeepAlive :is="view">
-        <TheOrder @showModal="showModalFunc" />
-      </KeepAlive>
+      <TheOrder @showModal="showModalFunc" />
     </div>
     <TheVerificationModal v-if="showModal" @closeModal="closeModal" />
   </div>
@@ -120,6 +118,10 @@ export default {
     withDiscount() {
       return this.$store.getters.withDiscount;
     },
+  },
+  beforeRouteLeave(to, from, next) {
+    const response = confirm("If you leave, Your data will be lost !");
+    next(response);
   },
 };
 </script>
