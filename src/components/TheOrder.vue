@@ -26,6 +26,7 @@
             id="number"
             type="text"
             placeholder="+998"
+            v-maska="'+998 (##) ###-##-##'"
             :class="{ 'is-invalid': errors.number }"
           />
           <div class="invalid-feedback">{{ errors.number }}</div>
@@ -159,7 +160,7 @@
       <h2 class="order__title">Комментарий</h2>
       <div class="flex order__first">
         <div class="order__comments">
-          <label for="comments">Улица*</label>
+          <label for="comments">Комментарий*</label>
           <Field
             as="textarea"
             name="comments"
@@ -207,8 +208,8 @@ export default {
       schema: Yup.object().shape({
         firstName: Yup.string().required("First Name is required"),
         number: Yup.string()
-          .min(13)
-          .max(13)
+          .min(19)
+          .max(19)
           .required("Please enter valid number")
           .matches(/^\+998/, "Start with +998"),
         email: Yup.string()

@@ -6,6 +6,7 @@ import store from "./store";
 import firebase from "firebase";
 import Vue3Lottie from "vue3-lottie";
 import Toast from "vue-toastification";
+import Maska from "maska";
 import "vue-toastification/dist/index.css";
 import "vue3-lottie/dist/style.css";
 
@@ -43,5 +44,6 @@ createApp(App)
   .use(store)
   .use(Vue3Lottie)
   .use(Toast, options)
+  .use(Maska)
   .use(router)
   .mount("#app");
