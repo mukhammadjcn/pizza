@@ -4,6 +4,7 @@
       class="collection__item"
       v-for="collection in products"
       :key="collection"
+      :id="collection.name"
     >
       <h2 class="collection__title">{{ collection.name }}</h2>
       <div class="products__list">

@@ -1,6 +1,11 @@
 <template>
   <ul class="menu">
-    <a href="#bag" class="menu__item" v-for="item in list" :key="item.id">
+    <a
+      v-for="item in list"
+      class="menu__item"
+      :key="item.id"
+      :href="'/#' + item.name"
+    >
       <img :src="item.img" alt="" />
       <span>{{ item.name }}</span>
     </a>
