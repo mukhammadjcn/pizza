@@ -57,7 +57,11 @@
       </div>
       <TheOrder @showModal="showModalFunc" />
     </div>
-    <TheVerificationModal v-if="showModal" @closeModal="closeModal" />
+    <TheVerificationModal
+      v-if="showModal"
+      @closeModal="closeModal"
+      @nextTrue="nextTrue"
+    />
   </div>
 </template>
 
@@ -73,6 +77,7 @@ export default {
     return {
       promocode: "",
       showModal: false,
+      next: false,
     };
   },
   setup() {
@@ -107,6 +112,9 @@ export default {
       document.documentElement.scrollTop = 0; // For Chrome, Firefox, IE and Opera
       document.body.style.overflow = "hidden";
     },
+    nextTrue() {
+      this.next = true;
+    },
   },
   computed: {
     cart() {
@@ -120,8 +128,12 @@ export default {
     },
   },
   beforeRouteLeave(to, from, next) {
-    const response = confirm("If you leave, Your data will be lost !");
-    next(response);
+    if (next) {
+      next();
+    } else {
+      const response = confirm("If you leave, Your data will be lost !");
+      next(response);
+    }
   },
 };
 </script>

@@ -143,6 +143,7 @@ export default {
             this.toast.success(`Succesfully ordered"`);
             this.sendOrder();
             this.closeModalFunc();
+            this.nextTrue();
             this.$store.dispatch("restore", {
               cart: [],
               totalSum: 0,
@@ -170,6 +171,9 @@ export default {
         .catch((error) => {
           this.toast.error("Something went wrong: " + error.response.status);
         });
+    },
+    nextTrue() {
+      this.$emit("nextTrue");
     },
     closeModalFunc() {
       this.$emit("closeModal");
