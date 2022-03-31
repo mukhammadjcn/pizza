@@ -40,28 +40,34 @@
 
         <div class="nav__right flex">
           <span>Время работы: с 11:00 до 23:00</span>
-          <div class="user flex">
-            <svg
-              width="20"
-              height="20"
-              viewBox="0 0 20 20"
-              fill="none"
-              xmlns="http://www.w3.org/2000/svg"
-            >
-              <path
-                fill-rule="evenodd"
-                clip-rule="evenodd"
-                d="M10 0C7.35804 0 5.20825 2.14979 5.20825 4.79176C5.20825 7.43372 7.35803 9.58333 10 9.58333C12.642 9.58333 14.7918 7.43372 14.7918 4.79176C14.7918 2.14979 12.642 0 10 0ZM6.2755 4.79176C6.2755 2.73768 7.94613 1.06724 10 1.06724C12.0539 1.06724 13.7245 2.73768 13.7245 4.79176C13.7245 6.84566 12.0539 8.51609 10 8.51609C7.94614 8.51609 6.2755 6.84566 6.2755 4.79176Z"
-                fill="#FF7010"
-              />
-              <path
-                fill-rule="evenodd"
-                clip-rule="evenodd"
-                d="M5.96381 11.6665C3.59468 11.6665 1.66663 13.6453 1.66663 16.0768V19.4881C1.66663 19.7705 1.89005 19.9998 2.1652 19.9998H17.8347C18.1099 19.9998 18.3333 19.7705 18.3333 19.4881V16.0768C18.3333 13.6453 16.4052 11.6665 14.0361 11.6665H5.96381ZM2.66378 16.0768C2.66378 14.2092 4.14412 12.6899 5.96381 12.6899H14.0361C15.8558 12.6899 17.3361 14.2092 17.3361 16.0768V18.9764H2.66378V16.0768Z"
-                fill="#FF7010"
-              />
-            </svg>
-            <span> Войти в аккаунт </span>
+          <div class="user flex" @click="checkWithGoogle">
+            <div class="user flex" v-if="user !== null">
+              <img :src="user.img" alt="" />
+              <span>{{ user.name }}</span>
+            </div>
+            <div class="user flex" v-if="user == null">
+              <svg
+                width="20"
+                height="20"
+                viewBox="0 0 20 20"
+                fill="none"
+                xmlns="http://www.w3.org/2000/svg"
+              >
+                <path
+                  fill-rule="evenodd"
+                  clip-rule="evenodd"
+                  d="M10 0C7.35804 0 5.20825 2.14979 5.20825 4.79176C5.20825 7.43372 7.35803 9.58333 10 9.58333C12.642 9.58333 14.7918 7.43372 14.7918 4.79176C14.7918 2.14979 12.642 0 10 0ZM6.2755 4.79176C6.2755 2.73768 7.94613 1.06724 10 1.06724C12.0539 1.06724 13.7245 2.73768 13.7245 4.79176C13.7245 6.84566 12.0539 8.51609 10 8.51609C7.94614 8.51609 6.2755 6.84566 6.2755 4.79176Z"
+                  fill="#FF7010"
+                />
+                <path
+                  fill-rule="evenodd"
+                  clip-rule="evenodd"
+                  d="M5.96381 11.6665C3.59468 11.6665 1.66663 13.6453 1.66663 16.0768V19.4881C1.66663 19.7705 1.89005 19.9998 2.1652 19.9998H17.8347C18.1099 19.9998 18.3333 19.7705 18.3333 19.4881V16.0768C18.3333 13.6453 16.4052 11.6665 14.0361 11.6665H5.96381ZM2.66378 16.0768C2.66378 14.2092 4.14412 12.6899 5.96381 12.6899H14.0361C15.8558 12.6899 17.3361 14.2092 17.3361 16.0768V18.9764H2.66378V16.0768Z"
+                  fill="#FF7010"
+                />
+              </svg>
+              <span> Войти в аккаунт </span>
+            </div>
           </div>
         </div>
       </nav>
@@ -284,28 +290,34 @@
 
       <!-- Display on mobile screen only -->
       <div class="header__nav-mobile" :class="showNavbar ? 'showNavbar' : ''">
-        <div class="user flex">
-          <svg
-            width="20"
-            height="20"
-            viewBox="0 0 20 20"
-            fill="none"
-            xmlns="http://www.w3.org/2000/svg"
-          >
-            <path
-              fill-rule="evenodd"
-              clip-rule="evenodd"
-              d="M10 0C7.35804 0 5.20825 2.14979 5.20825 4.79176C5.20825 7.43372 7.35803 9.58333 10 9.58333C12.642 9.58333 14.7918 7.43372 14.7918 4.79176C14.7918 2.14979 12.642 0 10 0ZM6.2755 4.79176C6.2755 2.73768 7.94613 1.06724 10 1.06724C12.0539 1.06724 13.7245 2.73768 13.7245 4.79176C13.7245 6.84566 12.0539 8.51609 10 8.51609C7.94614 8.51609 6.2755 6.84566 6.2755 4.79176Z"
-              fill="#FF7010"
-            />
-            <path
-              fill-rule="evenodd"
-              clip-rule="evenodd"
-              d="M5.96381 11.6665C3.59468 11.6665 1.66663 13.6453 1.66663 16.0768V19.4881C1.66663 19.7705 1.89005 19.9998 2.1652 19.9998H17.8347C18.1099 19.9998 18.3333 19.7705 18.3333 19.4881V16.0768C18.3333 13.6453 16.4052 11.6665 14.0361 11.6665H5.96381ZM2.66378 16.0768C2.66378 14.2092 4.14412 12.6899 5.96381 12.6899H14.0361C15.8558 12.6899 17.3361 14.2092 17.3361 16.0768V18.9764H2.66378V16.0768Z"
-              fill="#FF7010"
-            />
-          </svg>
-          <span> Войти в аккаунт </span>
+        <div class="user flex" @click="checkWithGoogle">
+          <div class="flex" v-if="user !== null">
+            <img :src="user.img" alt="" />
+            <span>{{ user.name }}</span>
+          </div>
+          <div class="flex" v-if="user == null">
+            <svg
+              width="20"
+              height="20"
+              viewBox="0 0 20 20"
+              fill="none"
+              xmlns="http://www.w3.org/2000/svg"
+            >
+              <path
+                fill-rule="evenodd"
+                clip-rule="evenodd"
+                d="M10 0C7.35804 0 5.20825 2.14979 5.20825 4.79176C5.20825 7.43372 7.35803 9.58333 10 9.58333C12.642 9.58333 14.7918 7.43372 14.7918 4.79176C14.7918 2.14979 12.642 0 10 0ZM6.2755 4.79176C6.2755 2.73768 7.94613 1.06724 10 1.06724C12.0539 1.06724 13.7245 2.73768 13.7245 4.79176C13.7245 6.84566 12.0539 8.51609 10 8.51609C7.94614 8.51609 6.2755 6.84566 6.2755 4.79176Z"
+                fill="#FF7010"
+              />
+              <path
+                fill-rule="evenodd"
+                clip-rule="evenodd"
+                d="M5.96381 11.6665C3.59468 11.6665 1.66663 13.6453 1.66663 16.0768V19.4881C1.66663 19.7705 1.89005 19.9998 2.1652 19.9998H17.8347C18.1099 19.9998 18.3333 19.7705 18.3333 19.4881V16.0768C18.3333 13.6453 16.4052 11.6665 14.0361 11.6665H5.96381ZM2.66378 16.0768C2.66378 14.2092 4.14412 12.6899 5.96381 12.6899H14.0361C15.8558 12.6899 17.3361 14.2092 17.3361 16.0768V18.9764H2.66378V16.0768Z"
+                fill="#FF7010"
+              />
+            </svg>
+            <span> Войти в аккаунт </span>
+          </div>
         </div>
 
         <div class="header__nav-mobile--category">
@@ -397,6 +409,8 @@
 </template>
 
 <script>
+import firebase from "firebase";
+
 export default {
   name: "TheHeader",
   data() {
@@ -404,6 +418,7 @@ export default {
       option: false,
       height: 0,
       showNavbar: false,
+      user: null,
     };
   },
   computed: {
@@ -414,6 +429,38 @@ export default {
   methods: {
     showOption() {
       this.option = !this.option;
+    },
+    checkWithGoogle() {
+      const userInfo = localStorage.getItem("user");
+      if (!userInfo) {
+        const provider = new firebase.auth.GoogleAuthProvider();
+        firebase
+          .auth()
+          .signInWithPopup(provider)
+          .then((response) => {
+            this.user = {
+              img: response.additionalUserInfo.profile.picture,
+              name: response.additionalUserInfo.profile.name,
+            };
+            console.log(this.user);
+            localStorage.setItem(
+              "user",
+              JSON.stringify({
+                img: this.user.img,
+                name: this.user.name,
+              })
+            );
+          })
+          .catch((error) => console.log(error));
+      } else {
+        this.user = JSON.parse(userInfo);
+      }
+    },
+    checkUser() {
+      const userInfo = localStorage.getItem("user");
+      if (userInfo) {
+        this.user = JSON.parse(userInfo);
+      }
     },
     onScroll(e) {
       this.height = Math.floor(e.target.documentElement.scrollTop);
@@ -435,6 +482,7 @@ export default {
   },
   mounted() {
     window.addEventListener("scroll", this.onScroll);
+    this.checkUser();
   },
   beforeUnmount() {
     window.removeEventListener("scroll", this.onScroll);
@@ -490,6 +538,12 @@ export default {
   .user {
     gap: 8px;
     cursor: pointer;
+
+    img {
+      width: 24px;
+      border-radius: 6px;
+      height: 24px;
+    }
   }
 
   &__logo {
@@ -565,7 +619,6 @@ export default {
       transition: 0.4s ease-in-out;
       top: 60px;
     }
-
     &-mobile {
       display: none;
     }
@@ -654,9 +707,17 @@ export default {
           padding: 20px;
           gap: 16px;
 
+          img {
+            width: 36px;
+            height: 36px;
+            margin-right: 12px;
+            border-radius: 6px;
+          }
+
           svg {
             width: 24px;
             height: 24px;
+            margin-right: 8px;
           }
         }
 
