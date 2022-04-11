@@ -151,6 +151,7 @@ export default {
               quantity: 0,
               address: null,
             });
+            this.$store.dispatch("ordered", true);
             this.$router.push("/ordered");
           })
           .catch((error) => {

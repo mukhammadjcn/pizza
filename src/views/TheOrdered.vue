@@ -32,9 +32,15 @@ export default {
   },
   methods: {
     generateTrackNumber() {
-      const number = "310" + Math.floor(Math.random() * 202);
-      this.orderNumber = number;
-      this.orderLink = `https://t.17track.net/en#nums=${number}`;
+      const order = localStorage.getItem("orderNumber");
+      if (order) {
+        this.orderNumber = order;
+      } else {
+        const number = "310" + Math.floor(Math.random() * 202);
+        this.orderNumber = number;
+        this.orderLink = `https://t.17track.net/en#nums=${number}`;
+        localStorage.setItem("orderNumber", number);
+      }
     },
   },
   mounted() {

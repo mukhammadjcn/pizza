@@ -523,6 +523,7 @@ export default createStore({
     totalSum: 0,
     withDiscount: 0,
     quantity: 0,
+    ordered: false,
     address: null,
     AllProducts: function () {},
   },
@@ -554,6 +555,9 @@ export default createStore({
         Array.push(...state.products[item].list);
       }
       return Array;
+    },
+    ordered(state) {
+      return state.ordered;
     },
   },
   mutations: {
@@ -623,6 +627,9 @@ export default createStore({
       state.quantity = payload.quantity;
       state.address = payload.address;
     },
+    ordered(state, payload) {
+      state.ordered = payload;
+    },
   },
   actions: {
     addToCart(context, payload) {
@@ -651,6 +658,9 @@ export default createStore({
     },
     restore(context, payload) {
       context.commit("restoreStore", payload);
+    },
+    ordered(context, payload) {
+      context.commit("ordered", payload);
     },
   },
   modules: {},
